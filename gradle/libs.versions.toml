@@ -1,0 +1,92 @@
+[versions]
+agp = "8.4.1"
+kotlin = "2.0.0"
+coreKtx = "1.13.1"
+lifecycle = "2.8.0"
+activityCompose = "1.9.0"
+composeMP = "1.6.10"
+detekt = "1.17.1"
+buildConfig = "5.3.5"
+json = "1.6.3"
+koin = "3.5.6"
+kotlinx-coroutines = "1.8.1"
+ktor = "2.3.11"
+chucker = "3.5.2"
+
+[libraries]
+gradle-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+gradle-application = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+gradle-compose-compiler = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
+gradle-compose-core = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "composeMP" }
+gradle-serialx = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
+gradle-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
+
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "json" }
+
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
+androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
+androidx-lifecycle-process = { module = "androidx.lifecycle:lifecycle-process", version.ref = "lifecycle" }
+androidx-compose-viewModel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
+
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+
+ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
+ktor-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
+ktor-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-auth = { module = "io.ktor:ktor-client-auth", version.ref = "ktor" }
+ktor-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
+ktor-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
+chucker = { module = "com.github.chuckerteam.chucker:library", version.ref = "chucker" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+compose-core = { id = "org.jetbrains.compose", version.ref = "composeMP" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+kotlin-serialx = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+buildConfig = { id = "com.github.gmazzo.buildconfig", version.ref = "buildConfig" }
+
+setup-android-library = { id = "android-library-setup", version = "1.0.0" }
+setup-android-application= { id = "android-application-setup", version = "1.0.0" }
+setup-compose = { id = "compose-setup", version = "1.0.0" }
+
+[bundles]
+android-application = [
+    "androidx-core-ktx",
+    "androidx-lifecycle-runtime-ktx",
+    "androidx-activity-compose",
+    "koin-android",
+]
+gradle-plugins = [
+    "gradle-kotlin",
+    "gradle-application",
+    "gradle-compose-compiler",
+    "gradle-compose-core",
+    "gradle-serialx",
+    "gradle-detekt",
+]
+network-settings = [
+    "ktor-core",
+    "ktor-android",
+    "ktor-negotiation",
+    "ktor-logging",
+    "ktor-json",
+    "ktor-auth",
+    "ktor-okhttp",
+    "chucker",
+]
+feature-api = [
+    "kotlinx-serialization-json",
+]
+feature-impl = [
+    "kotlinx-serialization-json",
+    "kotlinx-coroutines-core",
+    "koin-core",
+]

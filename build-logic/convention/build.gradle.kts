@@ -1,5 +1,6 @@
 plugins {
     `kotlin-dsl`
+    alias(libs.plugins.buildConfig)
 }
 
 dependencies {
@@ -26,6 +27,13 @@ gradlePlugin {
         register("compose-setup") {
             id = "compose-setup"
             implementationClass = "ComposePlugin"
+            version = "1.0.0"
+        }
+    }
+    plugins {
+        register("tech-change-folders") {
+            id = "tech-change-folders"
+            implementationClass = "ChangeFoldersPlugin"
             version = "1.0.0"
         }
     }

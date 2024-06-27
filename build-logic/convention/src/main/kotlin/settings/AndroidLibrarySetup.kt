@@ -49,4 +49,6 @@ internal fun Project.androidLibrarySetup(
 
     sourceSets["main"].res.srcDirs("src/commonMain/resources", "src/androidMain/res")
     sourceSets["main"].resources.srcDirs("src/commonMain/resources")
+
+    secretsSetup()
 }

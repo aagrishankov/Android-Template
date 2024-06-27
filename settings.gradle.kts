@@ -36,5 +36,29 @@ dependencyResolutionManagement {
 
 rootProject.name = "nota_template"
 includeBuild("build-logic")
-include(":app")
- 
+include(
+    ":app",
+
+    ":core:base:architecture",
+    ":core:base:navigation:api",
+    ":core:base:navigation:impl",
+    ":core:base:mvi",
+    ":core:constants",
+    ":core:di",
+    ":core:environment",
+    ":core:immutable",
+    ":core:logger",
+    ":core:network:api",
+    ":core:network:impl",
+    ":core:storage:api",
+    ":core:storage:impl",
+    ":core:ui:common",
+    ":core:ui:res",
+    ":core:ui:uikit",
+
+    ":common:umbrella",
+
+    ":features:example:api",
+    ":features:example:impl",
+
+)

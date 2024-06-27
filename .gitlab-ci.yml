@@ -1,0 +1,18 @@
+
+image: theimpulson/gitlab-ci-android
+
+stages:
+  - build
+
+variables:
+  GRADLE_VERSION: "8.6" # Установите вашу текущую версию Gradle здесь
+
+cache:
+  key: "$GRADLE_VERSION"
+  paths:
+    - .gradle/
+
+assembleDev:
+  stage: build
+  script:
+    - ./gradlew clean assembleDevGmsDebug

@@ -9,6 +9,14 @@ val projectName = findProperty("projectName")?.toString()
 android {
     kotlinOptions.jvmTarget = "17"
 
+    val devStageUrl = findProperty("devStageUrl").toString()
+    val prodStageUrl = findProperty("prodStageUrl").toString()
+    rootProject.ext.set("API_STAGES", listOf(devStageUrl, prodStageUrl))
+
+    val devStageWebUrl = findProperty("devStageWebUrl").toString()
+    val prodStageWebUrl = findProperty("prodStageWebUrl").toString()
+    rootProject.ext.set("WEB_STAGES", listOf(devStageWebUrl, prodStageWebUrl))
+
     val devSign by signingConfigs.creating {
         storeFile = file(findProperty("localStoreFile")?.toString() ?: "nothing")
         storePassword = findProperty("localStorePassword").toString()
@@ -33,27 +41,25 @@ android {
 
     val dev by productFlavors.creating {
         dimension = "stage"
-        versionNameSuffix = "-demo"
+        versionNameSuffix = "-dev"
         applicationIdSuffix = ".debug"
         signingConfig = devSign
+        rootProject.ext.set("DEFAULT_BASE_URL", devStageUrl) //TODO
+        rootProject.ext.set("DEFAULT_BASE_WEB_URL", devStageWebUrl) //TODO
+        rootProject.ext.set("IS_DEV_STAGE", true)
     }
 
     val prod by productFlavors.creating {
         dimension = "stage"
         versionNameSuffix = "-prod"
         signingConfig = prodSign
+        rootProject.ext.set("DEFAULT_BASE_URL", prodStageUrl) //TODO
+        rootProject.ext.set("DEFAULT_BASE_WEB_URL", prodStageWebUrl) //TODO
+        rootProject.ext.set("IS_DEV_STAGE", false)
     }
 }
 
 dependencies {
-
     implementation(libs.bundles.android.application)
-
-    implementation(compose.ui)
-    implementation(compose.material3)
-    implementation(compose.foundation)
-
-    implementation(compose.preview)
-    implementation(compose.uiTooling)
-
+    implementation(projects.common.umbrella)
 }

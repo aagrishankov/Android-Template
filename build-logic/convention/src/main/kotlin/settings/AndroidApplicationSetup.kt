@@ -46,11 +46,12 @@ internal fun Project.androidApplicationSetup(
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+
     }
 
     buildFeatures {
         buildFeatures.buildConfig = true
-        buildFeatures.compose = true
+        buildFeatures.compose = false
         buildFeatures.viewBinding = false
         buildFeatures.aidl = false
         buildFeatures.prefab = false
@@ -72,7 +73,11 @@ internal fun Project.androidApplicationSetup(
                 val pattern = findProperty("apkPattern")?.toString()
                     ?: error("Not Found 'Apk Pattern'")
 
+                val projectName = findProperty("projectName")?.toString()
+                    ?: error("Not Found 'Apk projectName'")
+
                 val newApkName = pattern
+                    .replace("\$projectName", "-$projectName")
                     .replace("\$versionName", "-$versionName")
                     .replace("\$versionCode", "-$versionCode")
                     .replace(
@@ -81,12 +86,16 @@ internal fun Project.androidApplicationSetup(
                     )
                     .replace("\$buildType", if (name.contains("debug", true)) "-debug" else "")
 
-                output.outputFileName = newApkName
+                output.outputFileName =
+                    if (newApkName.startsWith("-")) newApkName.substring(1)
+                    else newApkName
             }
     }
 
     sourceSets["main"].res.srcDirs("src/commonMain/resources", "src/androidMain/res")
     sourceSets["main"].resources.srcDirs("src/commonMain/resources")
+
+    secretsSetup()
 }
 
 private fun Project.calculateVersionCode(): Int {
